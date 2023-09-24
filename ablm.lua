@@ -30,6 +30,8 @@ function ABLoop.load()
     for l in f:lines() do
         table.insert(ABLoop.list, l)
     end
+
+    ABLoop.sort()
 end
 
 function ABLoop.move(step)
@@ -45,10 +47,7 @@ function ABLoop.move(step)
         ABLoop.curr = #ABLoop.list
     end
 
-    print(#ABLoop.list, ABLoop.list)
-    print(ABLoop.list[1])
     local loop_a, loop_b = ABLoop.parse(ABLoop.list[ABLoop.curr])
-    print(loop_a .. " " .. loop_b)
 
     mp.command("ab-loop")
     mp.set_property("ab-loop-a", loop_a)
