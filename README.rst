@@ -4,7 +4,7 @@ ABLM - an A-B Loop Manager
 ablm is a mpv script for managing A-B loops, with the following features:
 
 - saving and restoring multiple A-B loops for every single video
-- replaying and moving between any saved A-B loop
+- replaying and moving between any saved A-B loops
 
 Usage
 -----
