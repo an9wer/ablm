@@ -9,8 +9,8 @@ ablm is a mpv script for managing A-B loops, with the following features:
 Usage
 -----
 
-Download and save the script file *ablm.lua* to mpv's script directory (should
-be *~/.config/mpv/scripts* for linux), then you can interact with A-B loops in
+Download the script file *ablm.lua* to mpv's script directory (should be
+*~/.config/mpv/scripts* for linux), then you can interact with A-B loops in
 mpv using the following keybinds:
 
 - ``Alt-l``: save the current A-B loop
