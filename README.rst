@@ -15,4 +15,4 @@ mpv using the following keybinds:
 
 - ``Alt-l``: save the current A-B loop
 - ``Ctrl-l``: move to the next A-B loop
-- ``Ctrl-L``: move to the previous A-B loop
+- ``Ctrl-Shift-l``: move to the previous A-B loop
