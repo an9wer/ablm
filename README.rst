@@ -10,9 +10,17 @@ Usage
 -----
 
 Download the script file *ablm.lua* to mpv's script directory (should be
-*~/.config/mpv/scripts* for linux), then you can interact with A-B loops in
-mpv using the following keybinds:
+*~/.config/mpv/scripts* for linux), then use the following keybinds to interact
+with A-B loops in mpv:
 
-- ``Alt-l``: save the current A-B loop
-- ``Ctrl-l``: move to the next A-B loop
-- ``Ctrl-Shift-l``: move to the previous A-B loop
+=============  ===============================
+ key            function
+=============  ===============================
+ Alt-l          save the current A-B loop
+ Ctrl-l         load the next A-B loop
+ Ctrl-Shift-l   load to the previous A-B loop
+ Ctrl-LEFT      backward the loop A
+ Ctrl-RIGHT     forward the loop A
+ Alt-LEFT       backward the loop B
+ Alt-RIGHT      forward the loop B
+=============  ===============================
