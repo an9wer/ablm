@@ -4,7 +4,9 @@ ABLoop = {
 }
 
 function ABLoop.parse(ab_loop_string)
-	return string.match(ab_loop_string, "(%d+%.%d+),(%d+%.%d+)")
+	loop_a, loop_b = string.match(ab_loop_string, "(%d+%.%d+),(%d+%.%d+)")
+	-- TODO: error handling
+	return tonumber(loop_a), tonumber(loop_b)
 end
 
 function ABLoop.sort()
@@ -52,7 +54,7 @@ function ABLoop.move(step)
 	mp.set_property("ab-loop-a", loop_a)
 	mp.set_property("ab-loop-b", loop_b)
 	mp.command(string.format("seek %s absolute", loop_a))
-	mp.osd_message(string.format("Restore A-B loop: [%d/%d] %s - %s", ABLoop.curr, #ABLoop.list, loop_a, loop_b))
+	mp.osd_message(string.format("Restore A-B loop: [%d/%d] %.3f - %.3f", ABLoop.curr, #ABLoop.list, loop_a, loop_b))
 end
 
 function ABLoop.adjust(a_or_b, step)
