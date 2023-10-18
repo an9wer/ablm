@@ -71,10 +71,6 @@ function ABLoop.adjust(a_or_b, step)
 		loop_b = loop_b + step
 	end
 
-	if loop_a > loop_b then
-		loop_a, loop_b = loop_b, loop_a
-	end
-
 	mp.set_property("ab-loop-a", loop_a)
 	mp.set_property("ab-loop-b", loop_b)
 	mp.command(string.format("seek %s absolute", loop_b - 0.5))
@@ -83,18 +79,23 @@ end
 
 function ABLoop.save()
 	local path = mp.get_property("path")
-	local loop_a = mp.get_property("ab-loop-a")
-	local loop_b = mp.get_property("ab-loop-b")
+	local loop_a = tonumber(mp.get_property("ab-loop-a"))
+	local loop_b = tonumber(mp.get_property("ab-loop-b"))
 
-	if loop_a == "no" or loop_b == "no" then
+	if loop_a == nil or loop_b == nil then
 		mp.osd_message("No A-B loop to save")
-	else
-		-- TODO: catching errors
-		local f, err, errno = io.open(path .. ".abl", "a+")
-		f:write(string.format("%s,%s\n", loop_a, loop_b))
-		f:close()
-		mp.osd_message(string.format("Save A-B loop: %s - %s", loop_a, loop_b))
+		return
 	end
+
+	if loop_a > loop_b then
+		loop_a, loop_b = loop_b, loop_a
+	end
+
+	-- TODO: catching errors
+	local f, err, errno = io.open(path .. ".abl", "a+")
+	f:write(string.format("%.3f,%.3f\n", loop_a, loop_b))
+	f:close()
+	mp.osd_message(string.format("Save A-B loop: %.3f - %.3f", loop_a, loop_b))
 end
 
 
