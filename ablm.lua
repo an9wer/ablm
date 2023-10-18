@@ -25,15 +25,18 @@ end
 
 function ABLoop.load()
 	local path = mp.get_property("path")
+	local f = io.open(path .. ".abl", "r")
 
-	-- TODO: error handling
-	local f, err, errno = io.open(path .. ".abl", "r")
+	if f == nil then
+		return
+	end
 
 	for l in f:lines() do
 		table.insert(ABLoop.list, l)
 	end
-
 	ABLoop.sort()
+
+	f:close()
 end
 
 function ABLoop.move(step)
@@ -80,7 +83,6 @@ function ABLoop.adjust(a_or_b, step)
 end
 
 function ABLoop.save()
-	local path = mp.get_property("path")
 	local loop_a = tonumber(mp.get_property("ab-loop-a"))
 	local loop_b = tonumber(mp.get_property("ab-loop-b"))
 
@@ -92,9 +94,16 @@ function ABLoop.save()
 	if loop_a > loop_b then
 		loop_a, loop_b = loop_b, loop_a
 	end
+	-- TODO: remove duplicates
 
-	-- TODO: catching errors
-	local f, err, errno = io.open(path .. ".abl", "a+")
+	local path = mp.get_property("path")
+	local f = io.open(string.format("%s.abl", path), "a+")
+
+	if f == nil then
+		mp.osd_message(string.format("Unable to open %s.abl", path))
+		return
+	end
+
 	f:write(string.format("%.3f,%.3f\n", loop_a, loop_b))
 	f:close()
 	mp.osd_message(string.format("Save A-B loop: %.3f - %.3f", loop_a, loop_b))
